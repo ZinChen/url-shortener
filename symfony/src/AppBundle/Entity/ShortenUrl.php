@@ -2,33 +2,50 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * ShortenUrl
+ *
+ * @ORM\Table(name="shorten_url")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ShortenUrlRepository")
  */
 class ShortenUrl
 {
     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="original_url", type="string", length=255)
      */
     private $original_url;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="short_url", type="string", length=255)
      */
     private $short_url;
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="use_count", type="integer")
      */
     private $use_count;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="create_date", type="date")
      */
     private $create_date;
 
