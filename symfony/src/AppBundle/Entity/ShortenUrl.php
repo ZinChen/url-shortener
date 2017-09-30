@@ -123,6 +123,18 @@ class ShortenUrl
     }
 
     /**
+     * Increment useCount
+     *
+     * @return ShortenUrl
+     */
+    public function incrementUseCount()
+    {
+        $this->use_count++;
+
+        return $this;
+    }
+
+    /**
      * Get useCount
      *
      * @return int

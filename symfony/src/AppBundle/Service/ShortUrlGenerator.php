@@ -10,7 +10,7 @@ class ShortUrlGenerator
 
     public function __construct($shortUrlLength, $useDigits)
     {
-        $this->length = $shortUrlLength;
+        $this->length = max(array($shortUrlLength, 5));
         $this->useDigits = $useDigits;
     }
 
