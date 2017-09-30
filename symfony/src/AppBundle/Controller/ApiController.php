@@ -82,7 +82,18 @@ class ApiController extends Controller
                 'status' => 'error',
                 'message' => 'full url is missing'
             );
-        } elseif ($shortUrl) {
+        } elseif (!filter_var(idn_to_ascii($fullUrl), FILTER_VALIDATE_URL)) {
+            $response = array(
+                'status' => 'error',
+                'message' => 'full url is not valid'
+            );
+        }
+
+        if (!empty($response)) {
+            return $this->json($response);
+        }
+
+        if ($shortUrl) {
             $shortUrlGenerator = $this->get(ShortUrlGenerator::class);
             if ($shortUrlGenerator->validateChars($shortUrl) === false) {
                 $response = array(
