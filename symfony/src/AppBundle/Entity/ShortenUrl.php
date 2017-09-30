@@ -38,9 +38,9 @@ class ShortenUrl
     /**
      * @var int
      *
-     * @ORM\Column(name="use_count", type="integer")
+     * @ORM\Column(name="use_count", type="integer", options={"default":0})
      */
-    private $use_count;
+    private $use_count = 0;
 
     /**
      * @var \DateTime

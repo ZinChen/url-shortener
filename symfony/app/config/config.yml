@@ -7,6 +7,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    # length of short url (min. 5)
+    short_url.length: 5
+    short_url.use_digits: true
 
 framework:
     #esi: ~

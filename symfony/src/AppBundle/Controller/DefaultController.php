@@ -18,4 +18,9 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
+    public function redirectAction($shortUrl)
+    {
+        // $this->addFlash('error', $message);
+    }
 }
