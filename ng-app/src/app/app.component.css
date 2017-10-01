@@ -1,0 +1,92 @@
+.content {
+  max-width: 1000px;
+  height: 100%;
+  margin: auto;
+
+  display: flex;
+  flex-flow: column;
+
+  align-items: center;
+  // justify-content: center;
+
+  background-color: #fff;
+  box-shadow: 0 22px 70px rgba(14,21,47,.4), 0 8px 30px rgba(14,21,47,.4);
+}
+
+.title {
+  margin-top: 10vmin;
+  margin-bottom: 20vmin;
+
+  font-size: 3em;
+  letter-spacing: .2em;
+  text-align: center;
+
+  color: #636363;
+}
+
+.input {
+  padding: .7em 1.4em;
+  border-radius: 2em;
+  border: 2px solid #673AB7;
+  color: #673AB7;
+}
+
+.button {
+  padding: .7em 1.4em;
+  border-radius: 2em;
+  border: 2px solid #673AB7;
+  background: #673AB7;
+  color: #fff;
+}
+
+.url-form {
+  text-align: center;
+}
+
+.url-input {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+}
+
+.url-button {
+  width: 8em;
+  font-size: 1.3em;
+  margin-bottom: 1em;
+
+  cursor: pointer;
+}
+
+.custom-url-group {
+  display: flex;
+  margin-top: 2em;
+}
+
+.custom-url-label {
+  padding: 0 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.custom-url-label input {
+  transform: scale(1.5);
+  margin-right: 0.6em;
+}
+
+.custom-url-wrapper {
+  text-align: center;
+  flex: 1
+}
+
+.custom-url-input {
+  width: 5.5em;
+  padding: 0.5em 1em;
+  font-size: 1.5em;
+}
+
+.message {
+  font-size: 1.3em;
+  color: #f30000;
+}

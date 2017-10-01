@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../symfony/web/ng",
       "assets": [
         "assets",
         "favicon.ico"
