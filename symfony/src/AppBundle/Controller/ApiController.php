@@ -47,18 +47,18 @@ class ApiController extends Controller
         if ($shortUrlGenerator->validateChars($shortUrl) === false) {
             $response = array(
                 'status' => 'error',
-                'message' => 'short url chars is not valid'
+                'message' => 'short URL chars is not valid'
             );
         } elseif ($shortUrlGenerator->validateLength($shortUrl) === false) {
             $response = array(
                 'status' => 'error',
-                'message' => 'short url length is not valid'
+                'message' => 'short URL length is not valid'
             );
         } else {
             $result = $repository->isShortUrlExists($shortUrl);
 
             $response = array(
-                'status' => 'success',
+                'status' => $result ? 'success' : 'error',
                 'busy' => $result
             );
         }
@@ -80,12 +80,12 @@ class ApiController extends Controller
         if (is_null($fullUrl)) {
             $response = array(
                 'status' => 'error',
-                'message' => 'full url is missing'
+                'message' => 'full URL is missing'
             );
         } elseif (!filter_var(idn_to_ascii($fullUrl), FILTER_VALIDATE_URL)) {
             $response = array(
                 'status' => 'error',
-                'message' => 'full url is not valid'
+                'message' => 'full URL is not valid'
             );
         }
 
@@ -98,17 +98,17 @@ class ApiController extends Controller
             if ($shortUrlGenerator->validateChars($shortUrl) === false) {
                 $response = array(
                     'status' => 'error',
-                    'message' => 'short url chars is not valid'
+                    'message' => 'short URL chars is not valid'
                 );
             } elseif ($shortUrlGenerator->validateLength($shortUrl) === false) {
                 $response = array(
                     'status' => 'error',
-                    'message' => 'short url length is not valid'
+                    'message' => 'short URL length is not valid'
                 );
             } elseif($repository->isShortUrlExists($shortUrl)) {
                 $response = array(
                     'status' => 'error',
-                    'message' => 'short url is busy'
+                    'message' => 'short URL is busy'
                 );
             }
         }
@@ -137,7 +137,7 @@ class ApiController extends Controller
         $response = array(
             'status' => 'success',
             'short_url' => $shortUrl,
-            'message' => 'short url created sucessfully'
+            'message' => 'short URL created sucessfully'
         );
 
         return $this->json($response);

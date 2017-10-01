@@ -44,8 +44,10 @@
 }
 
 .url-input {
+  width: 20em;
   font-size: 1.3em;
   margin-bottom: 1em;
+  margin-right: .5em;
 }
 
 .url-button {
@@ -58,7 +60,6 @@
 
 .custom-url-group {
   display: flex;
-  margin-top: 2em;
 }
 
 .custom-url-label {
@@ -82,6 +83,7 @@
 
 .custom-url-input {
   width: 5.5em;
+  text-align: center;
   padding: 0.5em 1em;
   font-size: 1.5em;
 }
