@@ -24,14 +24,14 @@ class ShortenUrl
     /**
      * @var string
      *
-     * @ORM\Column(name="original_url", type="string", length=255)
+     * @ORM\Column(name="original_url", type="text")
      */
     private $original_url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="short_url", type="string", length=255)
+     * @ORM\Column(name="short_url", type="string", length=50)
      */
     private $short_url;
 

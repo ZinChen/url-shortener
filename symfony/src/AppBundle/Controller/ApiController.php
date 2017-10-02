@@ -88,6 +88,7 @@ class ApiController extends Controller
     {
         $response = array();
         $repository = $this->getDoctrine()->getRepository(\AppBundle\Entity\ShortenUrl::class);
+        $shortUrlGenerator = $this->get(ShortUrlGenerator::class);
         $requestContent = $request->getContent();
         $requestContent = json_decode($requestContent, true);
         $fullUrl = isset($requestContent['fullUrl']) ? $requestContent['fullUrl'] : null;
@@ -96,15 +97,12 @@ class ApiController extends Controller
         if (is_null($fullUrl)) {
             $response = array(
                 'status' => 'error',
-                'message' => 'full URL is missing'
+                'message' => 'your URL is missing'
             );
-        // TODO: change validation
-        // this validation doesn't work for some urls
-        // } elseif (!filter_var(idn_to_ascii($fullUrl), FILTER_VALIDATE_URL)) {
-        } elseif (false) {
+        } elseif ($shortUrlGenerator->validateUrl($fullUrl) === false) {
             $response = array(
                 'status' => 'error',
-                'message' => 'full URL is not valid'
+                'message' => 'your URL is not valid'
             );
         }
 
@@ -113,7 +111,6 @@ class ApiController extends Controller
         }
 
         if ($shortUrl) {
-            $shortUrlGenerator = $this->get(ShortUrlGenerator::class);
             if ($shortUrlGenerator->validateChars($shortUrl) === false) {
                 $response = array(
                     'status' => 'error',
@@ -137,7 +134,6 @@ class ApiController extends Controller
         }
 
         if (is_null($shortUrl)) {
-            $shortUrlGenerator = $this->get(ShortUrlGenerator::class);
             do {
                 $shortUrl = $shortUrlGenerator->generate();
             } while ($repository->isShortUrlExists($shortUrl));

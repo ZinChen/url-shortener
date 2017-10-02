@@ -50,6 +50,16 @@ class ShortUrlGenerator
     }
 
     /**
+     * Validate real url
+     * @param  string  $url
+     * @return boolean
+     */
+    public function validateUrl($url)
+    {
+        return @get_headers($url, 1);
+    }
+
+    /**
      * Generate short url
      * @return $string
      */
