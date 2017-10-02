@@ -34,6 +34,20 @@ class ApiController extends Controller
         return $this->json(array('result' => $shorts));
     }
 
+    //TODO: getParamsAction, getDetailAction
+
+    /**
+     * @Route("/params", name="params")
+     * @Method({"GET"})
+     */
+    public function paramsAction()
+    {
+        return $this->json(array(
+                'length' => $this->getParameter('short_url.length'),
+                'use_digits' => $this->getParameter('short_url.use_digits'),
+            ));
+    }
+
     /**
      * @Route("/check/{shortUrl}", name="check")
      * @Method({"GET"})
@@ -74,15 +88,20 @@ class ApiController extends Controller
     {
         $response = array();
         $repository = $this->getDoctrine()->getRepository(\AppBundle\Entity\ShortenUrl::class);
-        $fullUrl = $request->request->get('full_url');
-        $shortUrl = $request->request->get('short_url');
+        $requestContent = $request->getContent();
+        $requestContent = json_decode($requestContent, true);
+        $fullUrl = isset($requestContent['fullUrl']) ? $requestContent['fullUrl'] : null;
+        $shortUrl = isset($requestContent['shortUrl']) ? $requestContent['shortUrl'] : null;
 
         if (is_null($fullUrl)) {
             $response = array(
                 'status' => 'error',
                 'message' => 'full URL is missing'
             );
-        } elseif (!filter_var(idn_to_ascii($fullUrl), FILTER_VALIDATE_URL)) {
+        // TODO: change validation
+        // this validation doesn't work for some urls
+        // } elseif (!filter_var(idn_to_ascii($fullUrl), FILTER_VALIDATE_URL)) {
+        } elseif (false) {
             $response = array(
                 'status' => 'error',
                 'message' => 'full URL is not valid'

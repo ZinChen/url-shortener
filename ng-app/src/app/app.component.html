@@ -1,15 +1,37 @@
 <div class="content">
   <h1 class="title">URL Shortener</h1>
   <form class="url-form">
-    <input class="input url-input" type="text" placeholder="Your URL">
-    <button class="button url-button">Shorten</button>
-    <div class="custom-url-group">
+    <input class="input url-input" type="text" placeholder="Your URL"
+           [(ngModel)]="fullUrl" name="fullUrl">
+    <button type="button" class="button url-button"
+            *ngIf="!urlCreated" (click)="shorten()">
+      Shorten
+    </button>
+    <button type="button" class="button url-button"
+            *ngIf="urlCreated"
+            ngxClipboard [cbContent]="fullUrl"
+            (cbOnSuccess)="message = 'URL successfully copied into buffer!'">
+      Copy!
+    </button>
+    <div class="custom-url-group" *ngIf="!urlCreated">
       <div class="custom-url-wrapper">
-          <input class="input custom-url-input" type="text" placeholder="AAAAA">
+        <div class="custom-url-desc" *ngIf="useCustomUrl">
+          Short URL length must be {{params.length}} and contain only letters
+          <span *ngIf="params.use_digits"> and digits</span>
+          .
+        </div>
+        <input class="input custom-url-input" type="text" placeholder="AAAAA"
+               *ngIf="useCustomUrl" [(ngModel)]="customUrl" name="customUrl">
       </div>
-      <label class="custom-url-label"><input type="checkbox">Custom URL</label>
+      <div class="custom-label-wrapper">
+        <label class="custom-url-label">
+          <input type="checkbox"
+                 [(ngModel)]="useCustomUrl" name="useCustomUrl">
+          Custom URL
+        </label>
+      </div>
     </div>
-    <div class="message"></div>
+    <div class="message" [class.msg-success]="urlCreated">{{message}}</div>
   </form>
 </div>
 
