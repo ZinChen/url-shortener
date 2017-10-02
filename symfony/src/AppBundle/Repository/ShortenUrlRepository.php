@@ -12,17 +12,15 @@ class ShortenUrlRepository extends \Doctrine\ORM\EntityRepository
 {
 
     /**
-     * Check if record with the same short url already exists
+     * Get info about short url
      * @param  string $shortUrl
-     * @return boolean
+     * @return Entity
      */
-    public function isShortUrlExists($shortUrl)
+    public function getShortUrlInfo($shortUrl)
     {
-        $result = $this->findOneBy(
+        return $this->findOneBy(
             array('short_url' => $shortUrl)
         );
-
-        return count($result);
     }
 
 }

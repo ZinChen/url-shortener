@@ -1,0 +1,41 @@
+.info {
+  padding: 2em;
+  margin-bottom: 1em;
+  background-color: #e2e2e2;
+}
+
+.info a:hover,
+.info a:visited,
+.info a:focus,
+.info a {
+  color: #000;
+}
+
+.navigation-link {
+  font-size: 1.3em;
+  margin-top: 1em;
+  text-decoration: underline;
+  color: #333;
+}
+
+.navigation-link i {
+  margin-right: .5em;
+}
+
+.short-url {
+  font-size: 2em;
+  margin-bottom: .5em ;
+}
+
+.full-url {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.created {
+  float: right;
+}
+
+.views {
+  float: left;
+}

@@ -25,9 +25,7 @@ class DefaultController extends Controller
     {
         $response = array();
         $repository = $this->getDoctrine()->getRepository(\AppBundle\Entity\ShortenUrl::class);
-        $shortUrlEntity = $repository->findOneBy(
-            array('short_url' => $shortUrl)
-        );
+        $shortUrlEntity = $repository->getShortUrlInfo($shortUrl);
 
         $logger = $this->get('logger');
 

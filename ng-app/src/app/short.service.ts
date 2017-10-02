@@ -23,8 +23,15 @@ export class ShortService {
                .catch(this.handleError);
   }
 
-  check(urlData: any): Promise<any> {
-    return this.http.post('/api/check', JSON.stringify(urlData), {headers: this.headers})
+  info(shortUrl: string): Promise<any> {
+    return this.http.get('/api/info/' + shortUrl, {headers: this.headers})
+               .toPromise()
+               .then(res => res.json())
+               .catch(this.handleError);
+  }
+
+  used(shortUrl: string): Promise<any> {
+    return this.http.get('/api/used/' + shortUrl, {headers: this.headers})
                .toPromise()
                .then(res => res.json())
                .catch(this.handleError);

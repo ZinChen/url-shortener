@@ -34,9 +34,9 @@ class ApiController extends Controller
         return $this->json(array('result' => $shorts));
     }
 
-    //TODO: getParamsAction, getDetailAction
-
     /**
+     * Get application parameters
+     *
      * @Route("/params", name="params")
      * @Method({"GET"})
      */
@@ -49,10 +49,12 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/check/{shortUrl}", name="check")
+     * Get short url details
+     *
+     * @Route("/info/{shortUrl}", name="info")
      * @Method({"GET"})
      */
-    public function checkAction($shortUrl)
+    public function infoAction($shortUrl)
     {
         $response = array();
         $repository = $this->getDoctrine()->getRepository(\AppBundle\Entity\ShortenUrl::class);
@@ -69,11 +71,14 @@ class ApiController extends Controller
                 'message' => 'short URL length is not valid'
             );
         } else {
-            $result = $repository->isShortUrlExists($shortUrl);
-
+            $info = $repository->getShortUrlInfo($shortUrl);
             $response = array(
-                'status' => $result ? 'success' : 'error',
-                'busy' => $result
+                'status' => 'success',
+                'busy' => count($info),
+                'fullUrl' => $info->getOriginalUrl(),
+                'shortUrl' => $info->getShortUrl(),
+                'useCount' => $info->getUseCount(),
+                'createDate' => $info->getCreateDate()->format('Y-m-d')
             );
         }
 
@@ -81,6 +86,47 @@ class ApiController extends Controller
     }
 
     /**
+     * Increment short url use counter
+     *
+     * @Route("/used/{shortUrl}", name="used")
+     * @Method({"GET"})
+     */
+    public function usedAction($shortUrl)
+    {
+        $response = array();
+        $repository = $this->getDoctrine()->getRepository(\AppBundle\Entity\ShortenUrl::class);
+        $shortUrlEntity = $repository->getShortUrlInfo($shortUrl);
+        if ($shortUrlEntity) {
+            $shortUrlEntity->incrementUseCount();
+
+            $logger = $this->get('logger');
+            $logger->info(
+                'Redirecting to url ' . $shortUrlEntity->getOriginalUrl() .
+                ' from short url ' . $shortUrlEntity->getShortUrl() .
+                ' ' . $shortUrlEntity->getUseCount() . ' time.'
+            );
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($shortUrlEntity);
+            $em->flush();
+
+            $response = array(
+                'status' => 'success',
+                'useCount' => $shortUrlEntity->getUseCount()
+            );
+        } else {
+            $response = array(
+                'status' => 'error',
+                'message' => 'short URL not found'
+            );
+        }
+
+        return $this->json($response);
+    }
+
+    /**
+     * Create new short url
+     *
      * @Route("/create", name="create")
      * @Method({"POST"})
      */
@@ -121,7 +167,7 @@ class ApiController extends Controller
                     'status' => 'error',
                     'message' => 'short URL length is not valid'
                 );
-            } elseif($repository->isShortUrlExists($shortUrl)) {
+            } elseif($repository->getShortUrlInfo($shortUrl)) {
                 $response = array(
                     'status' => 'error',
                     'message' => 'short URL is busy'
@@ -136,7 +182,7 @@ class ApiController extends Controller
         if (is_null($shortUrl)) {
             do {
                 $shortUrl = $shortUrlGenerator->generate();
-            } while ($repository->isShortUrlExists($shortUrl));
+            } while ($repository->getShortUrlInfo($shortUrl));
         }
 
         $em = $this->getDoctrine()->getManager();
