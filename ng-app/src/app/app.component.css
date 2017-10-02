@@ -24,11 +24,25 @@
   color: #636363;
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 2em;
+  }
+}
+
 .input {
   padding: .7em 1.4em;
   border-radius: 2em;
   border: 2px solid #673AB7;
   color: #673AB7;
+
+  transition: all .3s;
+}
+
+.input:focus,
+.input:active {
+  outline: none;
+  border-color: #7e47de;
 }
 
 .button {
@@ -41,7 +55,9 @@
   transition: all .3s;
 }
 
+.button:focus,
 .button:hover {
+  outline: none;
   background: #7e47de;
   border-color: #7e47de;
 }
@@ -51,10 +67,17 @@
 }
 
 .url-input {
-  width: 20em;
+  width: 25em;
   font-size: 1.3em;
   margin-bottom: 1em;
   margin-right: .5em;
+}
+
+@media (max-width: 768px) {
+  .url-input {
+    width: 100%;
+    margin-right: 0;
+  }
 }
 
 .url-button {

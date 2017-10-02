@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 import { ShortService } from './short.service';
+import { HotkeyModule } from 'angular2-hotkeys';
 
 @Component({
   selector: 'app-root',
+  host: {'(window:keydown)': 'hotkeys($event)'},
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -21,6 +23,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.getParams();
   }
+
+  // TODO: redo with binding to input and probably need to use angular2-hotkeys
+   hotkeys(event): void {
+      // ctrl + v hotkey
+      if (event.keyCode == 86 && event.ctrlKey) {
+        setTimeout(()=> this.shorten(), 100);
+      }
+   }
 
   getParams(): void {
     this.shortService.getParams().then(params => this.params = params);

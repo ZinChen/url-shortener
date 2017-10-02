@@ -1,8 +1,8 @@
 <div class="content">
   <h1 class="title">URL Shortener</h1>
   <form class="url-form">
-    <input class="input url-input" type="text" placeholder="Your URL"
-           [(ngModel)]="fullUrl" name="fullUrl">
+    <input class="input url-input" type="text" placeholder="Paste your URL"
+           [(ngModel)]="fullUrl" name="fullUrl" autofocus>
     <button type="button" class="button url-button"
             *ngIf="!urlCreated" (click)="shorten()">
       Shorten
@@ -10,8 +10,8 @@
     <button type="button" class="button url-button"
             *ngIf="urlCreated"
             ngxClipboard [cbContent]="fullUrl"
-            (cbOnSuccess)="message = 'URL successfully copied into buffer!'">
-      Copy!
+            (cbOnSuccess)="message = 'URL copied into buffer'">
+      <i class="fa fa-copy"></i> Copy!
     </button>
     <div class="custom-url-group" *ngIf="!urlCreated">
       <div class="custom-url-wrapper">
@@ -31,7 +31,7 @@
         </label>
       </div>
     </div>
-    <div class="message" [class.msg-success]="urlCreated">{{message}}</div>
+    <div class="message" [class.msg-success]="urlCreated">{{message}} <span *ngIf="message">!</span></div>
   </form>
 </div>
 

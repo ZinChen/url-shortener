@@ -152,7 +152,7 @@ class ApiController extends Controller
         $response = array(
             'status' => 'success',
             'short_url' => $shortUrl,
-            'message' => 'short URL created sucessfully'
+            'message' => 'short URL created successfully'
         );
 
         return $this->json($response);
