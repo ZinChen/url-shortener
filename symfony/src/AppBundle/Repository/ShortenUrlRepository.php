@@ -24,12 +24,13 @@ class ShortenUrlRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * Get url records created earlier than 15 days ago
+     * Get url records created more than 14 days ago
      */
     public function getOldUrls()
     {
         $criteria = new \Doctrine\Common\Collections\Criteria();
-        $criteria->where($criteria->expr()->lt('create_date', (new \DateTime())->modify('-15 day') ));
+        $criteria->where($criteria->expr()->lt('create_date', (new \DateTime())->modify('-14 day') ));
+
         return $this->matching($criteria);
     }
 

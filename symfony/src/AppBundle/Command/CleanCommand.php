@@ -14,7 +14,7 @@ class CleanCommand extends ContainerAwareCommand
     {
         $this
             ->setName('urls:clean')
-            ->setDescription('Delete URLs created earlier than 15 days ago');
+            ->setDescription('Delete URLs created more than 14 days ago');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

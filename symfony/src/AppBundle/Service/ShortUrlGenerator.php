@@ -56,7 +56,8 @@ class ShortUrlGenerator
      */
     public function validateUrl($url)
     {
-        return @get_headers($url, 1);
+        $headers = @get_headers($url, 1);
+        return $headers && isset($headers[0]) && $headers[0] === 'HTTP/1.1 200 OK';
     }
 
     /**
