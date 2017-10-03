@@ -17,24 +17,6 @@ class ApiController extends Controller
 {
 
     /**
-     * @Route("/", name="apitest")
-     */
-    public function indexAction(Request $request)
-    {
-        $response = array();
-        $repository = $this->getDoctrine()->getRepository(\AppBundle\Entity\ShortenUrl::class);
-
-        $shorts = $repository->createQueryBuilder('c')
-            ->getQuery()
-            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-
-        $logger = $this->get('logger');
-        $logger->info(var_export($shorts, true));
-
-        return $this->json(array('result' => $shorts));
-    }
-
-    /**
      * Get application parameters
      *
      * @Route("/params", name="params")
@@ -80,6 +62,12 @@ class ApiController extends Controller
                 'useCount' => $info->getUseCount(),
                 'createDate' => $info->getCreateDate()->format('Y-m-d')
             );
+
+            $logger = $this->get('logger');
+            $logger->info(
+                'Getting info for short URL ' . $shortUrlEntity->getShortUrl() .
+                ' with full URL' . $shortUrlEntity->getOriginalUrl()
+            );
         }
 
         return $this->json($response);
@@ -101,8 +89,8 @@ class ApiController extends Controller
 
             $logger = $this->get('logger');
             $logger->info(
-                'Redirecting to url ' . $shortUrlEntity->getOriginalUrl() .
-                ' from short url ' . $shortUrlEntity->getShortUrl() .
+                'Redirecting to URL ' . $shortUrlEntity->getOriginalUrl() .
+                ' with short URL ' . $shortUrlEntity->getShortUrl() .
                 ' ' . $shortUrlEntity->getUseCount() . ' time.'
             );
 
@@ -194,6 +182,12 @@ class ApiController extends Controller
 
         $em->persist($shortenUrl);
         $em->flush();
+
+        $logger = $this->get('logger');
+        $logger->info(
+            'Successfully created short URL ' . $shortenUrl->getShortUrl() .
+            'for URL ' . $shortenUrl->getOriginalUrl()
+        );
 
         $response = array(
             'status' => 'success',
