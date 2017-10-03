@@ -1,6 +1,6 @@
 # URL shortener
 
-Web service to shorten URLs. Built with Symfony 3 and Angular 4. It allows share your shorten URL, watch count of views of current URL. Short URL will be deleted after 2 weeks since creation date.
+Web service to shorten URLs. Built with Symfony 3 and Angular 4. It allows sharing your shorten URL, watch count of views of current URL. Short URL will be deleted after 2 weeks since creation date.
 
 #### Docker Compose running
 ```
@@ -15,7 +15,7 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' url
 
 #### Application Parameters
 
-Application parameters placed in config.yml. Parameters allows to set **length** of short URL's and enable **using of digits** for them.
+Application parameters placed in config.yml. Parameters allow to set **length** of short URL's and enable **using of digits** for them.
 ```
 symfony/app/config/config.yml
 ...
