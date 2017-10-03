@@ -28,7 +28,7 @@ symfony/app/config/config.yml
 
 **Get application parameters**
 ```
-     GET: /params
+GET: /params
 ```
 Response:
 ```
@@ -40,7 +40,7 @@ Response:
 
 **Get short url details**
 ```
-     GET: /info/{shortUrl}
+GET: /info/{shortUrl}
 ```
 Response:
 ```
@@ -56,7 +56,7 @@ Response:
 
 **Increment short url use counter**
 ```
-    GET: /used/{shortUrl}
+GET: /used/{shortUrl}
 ```
 Response:
 ```
@@ -68,7 +68,7 @@ Response:
 
 **Create new short url**
 ```
-    POST: /create"
+POST: /create"
 ```
 Request:
 ```
