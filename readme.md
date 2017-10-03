@@ -68,7 +68,7 @@ Response:
 
 **Create new short url**
 ```
-POST: /create"
+POST: /create
 ```
 Request:
 ```
