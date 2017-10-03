@@ -65,8 +65,8 @@ class ApiController extends Controller
 
             $logger = $this->get('logger');
             $logger->info(
-                'Getting info for short URL ' . $shortUrlEntity->getShortUrl() .
-                ' with full URL' . $shortUrlEntity->getOriginalUrl()
+                'Getting info for short URL ' . $info->getShortUrl() .
+                ' with full URL' . $info->getOriginalUrl()
             );
         }
 

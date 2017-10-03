@@ -8,7 +8,7 @@ import { ShortService } from './short.service';
 
 @Component({
   selector: 'redirect',
-  template: ``,
+  template: `You will be redirected soon...`,
   styles: []
 })
 export class RedirectComponent implements OnInit {
