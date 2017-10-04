@@ -2,7 +2,7 @@
 
 Web service to shorten URLs. Built with Symfony 3 and Angular 4. It allows sharing your shorten URL, watch count of views of current URL. Short URL will be deleted after 2 weeks since creation date.
 
-#### Docker Compose running
+### Docker Compose running
 ```
 docker-compose up -d
 ```
@@ -13,19 +13,13 @@ Add urlshortener.dev domain into /etc/hosts. To get docker container IP use this
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' urlshortener_nginx_1
 ```
 
-To init database or run other symfony console commandse use **docker exec** like that:
+To init database or run other symfony console commands use **docker exec** like that:
 ```
 docker exec urlshortener_php_1 sh -c "php bin/console doctrine:database:create"
 docker exec urlshortener_php_1 sh -c "php bin/console doctrine:schema:update"
 ```
 
-#### Command to delete old URLs
-
-```
-php bin/console urls:clean
-```
-
-#### Application Parameters
+### Application Parameters
 
 Application parameters placed in config.yml. Parameters allow to set **length** of short URL's and enable **using of digits** for them.
 ```
@@ -36,7 +30,7 @@ symfony/app/config/config.yml
 ...
 ```
 
-#### Application API
+### Application API
 
 **Get application parameters**
 ```
@@ -104,4 +98,10 @@ Response:
     status: 'error',
     message: 'full URL is not valid'
 }
+```
+
+### Command to delete old URLs
+
+```
+php bin/console urls:clean
 ```
