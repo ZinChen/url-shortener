@@ -105,3 +105,9 @@ Response:
 ```
 php bin/console urls:clean
 ```
+
+cron task
+
+```
+0  3  *  *  * /usr/bin/php /var/www/symfony/bin/console urls:clean
+```
