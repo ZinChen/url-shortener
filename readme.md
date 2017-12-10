@@ -2,6 +2,8 @@
 
 Web service to shorten URLs. Built with Symfony 3 and Angular 4. It allows sharing your shorten URL, watch count of views of current URL. Short URL will be deleted after 2 weeks since creation date.
 
+Demo: https://url-shortener-atoll.herokuapp.com/
+
 ### Docker Compose running
 ```
 docker-compose up -d
